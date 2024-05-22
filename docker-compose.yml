@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: ./docker/Dockerfile
+    image: home_gpt_server:latest
+    shm_size: '10gb'
+    container_name: home_gpt_server
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "8000:8000"
+    volumes:
+      - /mnt/nvme1/models/model:/app/models/model
+    privileged: true
+    pid: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
