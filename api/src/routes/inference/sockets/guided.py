@@ -2,7 +2,6 @@ import logging
 import uuid
 import json
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-from src.utilities.json_to_pydantic import JSONSchemaToPydantic
 from vllm import AsyncLLMEngine, SamplingParams
 from outlines.serve.vllm import JSONLogitsProcessor
 from src.model.config import engine, tokenizer
